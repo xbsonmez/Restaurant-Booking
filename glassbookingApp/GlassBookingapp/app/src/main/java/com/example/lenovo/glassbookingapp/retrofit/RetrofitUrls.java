@@ -1,25 +1,30 @@
 package com.example.lenovo.glassbookingapp.retrofit;
 
-import java.util.HashMap;
+import com.example.lenovo.glassbookingapp.Model.Person;
 
-import okhttp3.RequestBody;
+import java.util.HashMap;
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface RetrofitUrls {
 
     @GET("persons")
-    Call<ResponseBody> getPersons(
-            @Query("id") int id
-    );
+    Call<List<Person>> getPersons();
 
     @POST("help")
     Call<ResponseBody> help(
             @Body HashMap<String, String> body
     );
+
+    @POST("accessLogin")
+    Call<Person>login(@Body HashMap<String,String>body);
+
+    @POST("addPerson")
+    Call<ResponseBody>signUp(@Body HashMap<String,String>body);
 
 }
