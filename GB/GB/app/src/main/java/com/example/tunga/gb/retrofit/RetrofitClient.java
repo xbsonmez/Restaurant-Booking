@@ -1,4 +1,4 @@
-package com.example.tunga.gb.retrofit;
+package com.example.lenovo.glassbookingapp.retrofit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -18,8 +18,7 @@ public class RetrofitClient {
         return getInstance().create(RetrofitUrls.class);
     }
 
-
-    public static Retrofit getInstance() {
+    private static Retrofit getInstance() {
 
         if (client == null) {
 
