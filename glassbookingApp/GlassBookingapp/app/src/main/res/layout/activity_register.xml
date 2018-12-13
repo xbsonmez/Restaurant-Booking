@@ -8,15 +8,17 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="6dp">
 
         <LinearLayout
             android:id="@+id/register_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
-            android:layout_marginEnd="36dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
             android:layout_marginBottom="16dp"
             android:orientation="vertical">
 
@@ -37,9 +39,9 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
 
-                android:layout_height="wrap_content">
+                android:layout_marginTop="16dp">
 
                 <EditText
                     android:id="@+id/editText5"
@@ -55,16 +57,16 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
 
-                android:layout_height="wrap_content">
+                android:layout_marginTop="16dp">
 
                 <EditText
                     android:id="@+id/editText6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Name"
+                    android:hint="Name and Surname"
                     android:inputType="textPersonName" />
 
 
@@ -73,26 +75,18 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
 
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/editText7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Surname"
-                    android:inputType="textPersonName" />
+                android:layout_marginTop="16dp">
 
             </android.support.design.widget.TextInputLayout>
 
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
 
-                android:layout_height="wrap_content">
+                android:layout_marginTop="16dp">
 
                 <EditText
                     android:id="@+id/editText8"
@@ -107,9 +101,9 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
 
-                android:layout_height="wrap_content">
+                android:layout_marginTop="16dp">
 
                 <EditText
                     android:id="@+id/editText9"
@@ -124,9 +118,9 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
 
-                android:layout_height="wrap_content">
+                android:layout_marginTop="16dp">
 
                 <EditText
                     android:id="@+id/editText10"
@@ -141,12 +135,13 @@
 
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-
                 android:layout_alignParentStart="true"
+
                 android:layout_alignParentTop="true"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
 
@@ -155,7 +150,7 @@
                     android:layout_width="71dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="user" />
+                    android:text="USER" />
 
                 <RadioButton
                     android:id="@+id/radioButton4"
@@ -163,11 +158,20 @@
                     android:layout_height="47dp"
                     android:layout_marginBottom="0dp"
                     android:layout_weight="1"
-                    android:text="manager" />
+                    android:text="MANAGER" />
             </RadioGroup>
 
-
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
+                tools:layout_editor_absoluteX="233dp"
+                tools:layout_editor_absoluteY="403dp" />
         </LinearLayout>
 
     </ScrollView>
+
+
+
 </android.support.constraint.ConstraintLayout>

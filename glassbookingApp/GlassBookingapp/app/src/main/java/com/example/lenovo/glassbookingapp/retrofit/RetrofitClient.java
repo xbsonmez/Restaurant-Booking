@@ -18,7 +18,7 @@ public class RetrofitClient {
         return getInstance().create(RetrofitUrls.class);
     }
 
-    public static Retrofit getInstance() {
+    private static Retrofit getInstance() {
 
         if (client == null) {
 

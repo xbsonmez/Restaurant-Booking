@@ -1,25 +1,21 @@
 package com.example.lenovo.glassbookingapp;
 
 import android.app.Activity;
-import android.app.AppComponentFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lenovo.glassbookingapp.Model.Help;
 import com.example.lenovo.glassbookingapp.retrofit.RetrofitClient;
 import com.example.lenovo.glassbookingapp.retrofit.RetrofitUrls;
 
 import java.util.HashMap;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,17 +60,25 @@ public class ForgetPassword extends AppCompatActivity {
             public void onResponse(@NonNull Call<ResponseBody> call,
                                    @NonNull Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Şifre Değiştirme maile gitti", Toast.LENGTH_SHORT)
+                    Toast.makeText(getApplicationContext(), "Successfully!!", Toast.LENGTH_SHORT)
                             .show();
                     hideKeyboard();
                     editText.setText("");
+
+                }else{
+                    Toast.makeText(getApplicationContext(),"Wrong email",Toast.LENGTH_SHORT)
+                            .show();
+
                 }
+
             }
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call,
                                   @NonNull Throwable t) {
 
+                Toast.makeText(getApplicationContext(), "Connection Problem!!", Toast.LENGTH_SHORT)
+                        .show();
 
             }
         });
