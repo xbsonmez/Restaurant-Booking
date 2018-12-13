@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.lenovo.glassbookingapp.Model.Person;
+import com.example.lenovo.glassbookingapp.Services.MessageService;
 import com.example.lenovo.glassbookingapp.retrofit.RetrofitClient;
 import com.example.lenovo.glassbookingapp.retrofit.RetrofitUrls;
 
@@ -97,26 +98,39 @@ public class RegisterActivity extends AppCompatActivity {
         body.put("confirmPassword",p1.getConfirmPassword());
         body.put("role",p1.getRole());
 
-        Call<ResponseBody> call =retrofitUrls.signUp(body);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<MessageService> call =retrofitUrls.signUp(body);
+        call.enqueue(new Callback<MessageService>() {
 
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull  Call<MessageService> call,@NonNull Response<MessageService> response) {
+
                 if(response.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Successfully!!", Toast.LENGTH_SHORT)
+
+                    MessageService message=response.body();
+
+
+
+                    Toast.makeText(getApplicationContext(), message.getMessage(), Toast.LENGTH_SHORT)
                             .show();
                     hideKeyboard();
                     sendMail(p1.getEmail());
                     openLoginActivity();
                 }
-                else {
-                    Toast.makeText(getApplicationContext(),"Failure!!",Toast.LENGTH_SHORT)
+                else{
+
+
+                   MessageService message=response.body();
+
+                     Toast.makeText(getApplicationContext(), message.getMessage(), Toast.LENGTH_LONG)
                             .show();
+                        hideKeyboard();
+
+
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<MessageService> call,@NonNull Throwable t) {
                 Toast.makeText(getApplicationContext(),"Connection Problem!!",Toast.LENGTH_SHORT)
                         .show();
             }
@@ -137,6 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
         body.put("email", email);
 
 
+
         Call<ResponseBody> call = retrofitUrls.help(body);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -149,6 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 }else{
+
                     Toast.makeText(getApplicationContext(),"Wrong email",Toast.LENGTH_SHORT)
                             .show();
 

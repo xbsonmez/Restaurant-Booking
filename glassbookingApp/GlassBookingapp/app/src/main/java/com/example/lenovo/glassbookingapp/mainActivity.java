@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.lenovo.glassbookingapp.Model.Person;
 import com.example.lenovo.glassbookingapp.retrofit.RetrofitClient;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -25,18 +26,23 @@ import retrofit2.Response;
 
 public class mainActivity extends AppCompatActivity {
 
-
     private RecyclerView recyclerView;
     private PersonAdapter personAdapter;
 
-
+    //PICASSO
+   // String url="https://i.ytimg.com/vi/wCyCsT8Swio/hqdefault.jpg";
+    //ImageView ıvImageFromUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.rv_persons);
-        setSupportActionBar(toolbar); 
+        setSupportActionBar(toolbar);
+
+        //PICASSO
+        //  ıvImageFromUrl=(ImageView)findViewById(R.id.ıv_image_from_url);
+        //Picasso.get().load("C:\\Users\\lenovo\\Desktop\\CV\\image-1.jpg").into(ıvImageFromUrl);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

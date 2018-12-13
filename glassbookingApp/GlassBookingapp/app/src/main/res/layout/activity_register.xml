@@ -167,7 +167,9 @@
                 android:layout_height="wrap_content"
                 android:text="Sign Up"
                 tools:layout_editor_absoluteX="233dp"
-                tools:layout_editor_absoluteY="403dp" />
+                tools:layout_editor_absoluteY="403dp"
+                android:textColor="#FFFFFF"
+                android:background="#AE2122"/>
         </LinearLayout>
 
     </ScrollView>

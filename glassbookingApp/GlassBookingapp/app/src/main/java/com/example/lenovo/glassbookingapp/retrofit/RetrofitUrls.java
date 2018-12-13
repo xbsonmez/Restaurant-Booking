@@ -1,6 +1,7 @@
 package com.example.lenovo.glassbookingapp.retrofit;
 
 import com.example.lenovo.glassbookingapp.Model.Person;
+import com.example.lenovo.glassbookingapp.Services.MessageService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,6 @@ public interface RetrofitUrls {
     Call<Person>login(@Body HashMap<String,String>body);
 
     @POST("addPerson")
-    Call<ResponseBody>signUp(@Body HashMap<String,String>body);
+    Call<MessageService>signUp(@Body HashMap<String,String>body);
 
 }

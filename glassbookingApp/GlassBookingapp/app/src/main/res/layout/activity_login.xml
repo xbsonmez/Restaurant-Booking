@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    tools:layout_editor_absoluteY="81dp">
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="20dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
 
         <LinearLayout
+
             android:id="@+id/login_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,6 +54,7 @@
 
                 <EditText
                     android:id="@+id/editText2"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -61,37 +64,53 @@
 
 
             <LinearLayout
+
                 android:id="@+id/loginbuttonslayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <Button
+
                     android:id="@+id/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Login" />
+                    android:background="#AE2122"
+                    android:text="Login"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"/>
 
                 <Button
+
                     android:id="@+id/button3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SIGN UP" />
+                    android:background="#AE2122"
+                    android:text="SIGN UP"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"/>
+
 
             </LinearLayout>
 
             <Button
                 android:id="@+id/button4"
-                android:layout_width="171dp"
+                android:layout_width="186dp"
                 android:layout_height="wrap_content"
-                android:text="forget password" />
 
-
+                android:background="#AE2122"
+                android:text="forget password"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"/>
         </LinearLayout>
 
     </ScrollView>
-
-
 
 
 </android.support.constraint.ConstraintLayout>
