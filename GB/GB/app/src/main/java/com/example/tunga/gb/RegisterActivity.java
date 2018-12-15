@@ -13,8 +13,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.lenovo.glassbookingapp.Model.Person;
-import com.example.lenovo.glassbookingapp.Services.MessageService;
+import com.example.lenovo.glassbookingapp.model.Person;
+import com.example.lenovo.glassbookingapp.services.MessageService;
 import com.example.lenovo.glassbookingapp.retrofit.RetrofitClient;
 import com.example.lenovo.glassbookingapp.retrofit.RetrofitUrls;
 

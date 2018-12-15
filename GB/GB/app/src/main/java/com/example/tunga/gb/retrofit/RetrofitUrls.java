@@ -1,7 +1,7 @@
 package com.example.lenovo.glassbookingapp.retrofit;
 
-import com.example.lenovo.glassbookingapp.Model.Person;
-import com.example.lenovo.glassbookingapp.Services.MessageService;
+import com.example.lenovo.glassbookingapp.model.Person;
+import com.example.lenovo.glassbookingapp.services.MessageService;
 
 import java.util.HashMap;
 import java.util.List;

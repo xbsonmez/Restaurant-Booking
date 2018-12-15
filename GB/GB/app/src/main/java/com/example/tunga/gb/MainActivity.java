@@ -10,13 +10,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.lenovo.glassbookingapp.Model.Person;
+import com.example.lenovo.glassbookingapp.model.Person;
 import com.example.lenovo.glassbookingapp.retrofit.RetrofitClient;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
