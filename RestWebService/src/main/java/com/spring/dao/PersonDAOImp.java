@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
@@ -40,7 +42,6 @@ public class PersonDAOImp implements PersonDAO {
 		person.setEnable(true);
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", person.getName());
-		params.put("surname", person.getSurname());
 		params.put("email", person.getEmail());
 		params.put("username", person.getUsername());
 		params.put("telno", person.getTelno());
@@ -48,7 +49,7 @@ public class PersonDAOImp implements PersonDAO {
 		params.put("password", person.getPassword());
 		params.put("enable", person.isEnable());
 		temp.update(
-				"insert into restaurantbooking.person(email,username,password,role,telno,name,surname,enable) values (:email,:username,:password,:role,:telno,:name,:surname,:enable)",
+				"insert into restaurantbooking.person(email,username,password,role,telno,name,enable) values (:email,:username,:password,:role,:telno,:name,:enable)",
 				params);
 
 	}
@@ -62,14 +63,17 @@ public class PersonDAOImp implements PersonDAO {
 
 	public boolean checkRegisterPasswords(@RequestBody Person person) {
 
-		if (person.getPassword().length() == 7) {
-			if (person.getConfirmPassword().equals(person.getPassword()))
-				return true;
-			else
-				return false;
-
-		}
+		if (person.getConfirmPassword().equals(person.getPassword())) {
+			return true;
+		} 
 		return false;
+	}
+	 
+	public boolean checkPasswordLength(String s) {
+		if(s.length()<5)
+			return false;
+		
+		return true;
 	}
 
 	public boolean checkUsername(@RequestBody Person person) {
@@ -103,9 +107,9 @@ public class PersonDAOImp implements PersonDAO {
 		return flag;
 	}
 
-	public boolean checkEmail(@RequestBody Person person) {
+	public boolean checkEmail(String email) {
 
-		boolean flag = true;
+		boolean flag = false;
 
 		try {
 
@@ -113,11 +117,11 @@ public class PersonDAOImp implements PersonDAO {
 			Statement stmt = con.createStatement();
 
 			// email control
-			String SQL2 = "SELECT  email FROM person where email='" + person.getEmail() + "'";
+			String SQL2 = "SELECT  email FROM person where email='" + email + "'";
 			ResultSet rs2 = stmt.executeQuery(SQL2);
 
 			if (rs2.next()) {
-				System.out.println("Failure! Already exisis username");
+				System.out.println("Failure! Already exisis email check maildaoimp");
 				flag = true;
 
 				System.out.println("rs next:" + flag);
@@ -138,24 +142,23 @@ public class PersonDAOImp implements PersonDAO {
 	public List<Person> loadAll() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			
+
 			Connection conn = null;
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurantbooking", "root", "");
 
 			Statement stmt = conn.createStatement();
-			
+
 			String SQL = "SELECT  * FROM restaurantbooking.person";
 
 			ResultSet rs = stmt.executeQuery(SQL);
 
 			List<Person> personList = new ArrayList<Person>();
-			
+
 			while (rs.next()) {
 
 				Person person = new Person();
-				
+
 				person.setName(rs.getString("name"));
-				person.setSurname(rs.getString("surname"));
 				person.setId(rs.getInt("personID"));
 				person.setEmail(rs.getString("email"));
 				person.setRole(rs.getString("role"));
@@ -163,15 +166,14 @@ public class PersonDAOImp implements PersonDAO {
 				person.setUsername(rs.getString("username"));
 				person.setPassword(rs.getString("password"));
 				person.setEnable(rs.getBoolean("enable"));
-				
-				
+
 				personList.add(person);
 			}
 
 			stmt.close();
 			conn.close();
 			return personList;
-			
+
 		} catch (Exception e) {
 
 			System.out.println("ERROR Connection");
@@ -180,9 +182,8 @@ public class PersonDAOImp implements PersonDAO {
 
 	}
 
-	public boolean findPerson(String username, String password) {
-
-		
+	public Person findPerson(String username, String password) {
+		Person currentPerson = new Person();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = null;
@@ -190,20 +191,28 @@ public class PersonDAOImp implements PersonDAO {
 
 			Statement stmt = conn.createStatement();
 
-			
-			
-			String SQL="SELECT * FROM restaurantbooking.person WHERE username='"+username+"' AND  password='"+password+"'";
+			String SQL = "SELECT * FROM restaurantbooking.person WHERE BINARY username='" + username
+					+ "' AND BINARY password='" + password + "'";
 			ResultSet rs = stmt.executeQuery(SQL);
-			
+
 			if (rs.next()) {
-				System.out.println("kullanýcý bulundu find by username and password");
-					return true;
-				}
-				
-			
+				currentPerson.setName(rs.getString("name"));
+				currentPerson.setEmail(rs.getString("email"));
+				currentPerson.setRole(rs.getString("role"));
+				currentPerson.setTelno(rs.getString("telno"));
+				currentPerson.setUsername(rs.getString("username"));
+				currentPerson.setPassword(rs.getString("password"));
+				currentPerson.setEnable(rs.getBoolean("enable"));
+
+				currentPerson.setId(rs.getInt("personID"));
+			}
 
 			stmt.close();
 			conn.close();
+
+			System.out.println("deneme" + currentPerson.getEmail());
+			return currentPerson;
+
 		}
 
 		catch (Exception e) {
@@ -211,7 +220,7 @@ public class PersonDAOImp implements PersonDAO {
 			System.out.println("ERROR Connection");
 		}
 
-		return false;
+		return currentPerson;
 	}
 
 	public boolean checktelNo(@RequestBody Person person) {
@@ -222,49 +231,54 @@ public class PersonDAOImp implements PersonDAO {
 	}
 
 	public boolean checkName(@RequestBody Person person) {
-		if (person.getName().length() > 0) {
+		if (person.getName().length() > 0 && isAlpha(person.getName())) {
 			return true;
 		}
-
 		return false;
 	}
 
-	public boolean checkSurname(@RequestBody Person person) {
-		if (person.getSurname().length() > 0) {
+	public boolean isAlpha(String name) {
+		return name.matches("[a-zA-Z]+");
+	}
+
+	public boolean validEmail(String email) {
+		Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+		Matcher mat = pattern.matcher(email);
+
+		if (mat.matches()) {
 			return true;
+		} else {
+
+			return false;
 		}
-		return false;
 	}
 
 	public Person findPersonID(int id) {
 		Person currentPerson = new Person();
 		try {
-			
+
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = null;
-			
+
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurantbooking", "root", "");
-			
+
 			Statement stmt = conn.createStatement();
-			
+
 			String SQL = "SELECT * FROM person where personID='" + id + "'";
-			
+
 			ResultSet rs = stmt.executeQuery(SQL);
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				currentPerson.setName(rs.getString("name"));
-				currentPerson.setSurname(rs.getString("surname"));
-				
 				currentPerson.setEmail(rs.getString("email"));
 				currentPerson.setRole(rs.getString("role"));
 				currentPerson.setTelno(rs.getString("telno"));
 				currentPerson.setUsername(rs.getString("username"));
 				currentPerson.setPassword(rs.getString("password"));
 				currentPerson.setEnable(rs.getBoolean("enable"));
-				
+
 				currentPerson.setId(id);
 			}
-			
 
 			stmt.close();
 			conn.close();
@@ -277,30 +291,23 @@ public class PersonDAOImp implements PersonDAO {
 
 		return currentPerson;
 	}
-	
+
 	public void update(@RequestBody Person person) {
 		Map<String, Object> params = new HashMap<String, Object>();
-			
-			
-			//String SQL = "UPDATE restaurantbooking.person SET 'name'='"+person.getName()+"','surname'='"+person.getSurname()+"','email'='"+person.getEmail()+"','telno'='"+person.getTelno()+"','username'='"+person.getUsername()+"','password'='"+person.getPassword()+"'  WHERE  personID='" +person.getId() + "'";
-			
-			String SQL="update person set name=:name ,surname=:surname,email=:email,telno=:telno,username=:username,password=:password where personID=:personID ";
-			
-			params.put("name", person.getName());
-			params.put("surname", person.getSurname());
-			params.put("email", person.getEmail());
-			params.put("telno", person.getTelno());
-			params.put("username", person.getUsername());	
-			params.put("password", person.getPassword());
-			params.put("personID", person.getId());
-			temp.update(SQL, params);
-	
 
-	
-	
-	
-	}
+		// String SQL = "UPDATE restaurantbooking.person SET
+		// 'name'='"+person.getName()+"','surname'='"+person.getSurname()+"','email'='"+person.getEmail()+"','telno'='"+person.getTelno()+"','username'='"+person.getUsername()+"','password'='"+person.getPassword()+"'
+		// WHERE personID='" +person.getId() + "'";
+
+		String SQL = "update person set email=:email,telno=:telno,username=:username,password=:password where personID=:personID ";
+
+		params.put("email", person.getEmail());
+		params.put("telno", person.getTelno());
+		params.put("username", person.getUsername());
+		params.put("password", person.getPassword());
+		params.put("personID", person.getId());
+		temp.update(SQL, params);
 
 	}
 
-
+}

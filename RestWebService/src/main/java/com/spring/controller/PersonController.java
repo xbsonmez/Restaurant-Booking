@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.Model.Person;
 import com.spring.Services.LoginService;
+import com.spring.Services.MessageService;
 import com.spring.dao.PersonDAO;
 
 @Controller
@@ -26,69 +27,71 @@ public class PersonController {
 	@Autowired
 	PersonDAO personDAO;
 
-	@RequestMapping(value = "/user", method = { RequestMethod.GET })
-	@ResponseBody
-	public List<Person> personList() {
-
-		List<Person> persons = new ArrayList<Person>();
-		Person person = new Person();
-
-		person.setName("burak");
-
-		persons.add(person);
-		return persons;
-
-	}
 
 	@RequestMapping(value = "/persons", method = { RequestMethod.GET })
 	@ResponseBody
 	public List<Person> getPerson() {
 
-		
 		return personDAO.loadAll();
 	}
 
 	@RequestMapping(value = "/addPerson", method = { RequestMethod.POST })
 	@ResponseBody
-	public HttpStatus savePerson(@RequestBody Person person, ModelMap modelMap) {
-
-		if (personDAO.checkEmail(person) == true) {
+	public ResponseEntity<MessageService> savePerson(@RequestBody Person person, ModelMap modelMap) {
+		 MessageService message=new MessageService();
+		 
+		 
+		if (personDAO.checkEmail(person.getEmail()) == true) {	
 			modelMap.put("error", "email already exist");
+			message.setMessage("email already exist"); 
 			System.out.println("email");
-		} else if (personDAO.checkUsername(person) == true) {
-			modelMap.put("error", "username already exist");
+			return new ResponseEntity<MessageService>(message,HttpStatus.BAD_REQUEST);
+		}else if(personDAO.validEmail(person.getEmail())==false) {
+			message.setMessage("invalid email format");
+			return new ResponseEntity<MessageService>(message,HttpStatus.BAD_REQUEST);
+		} else if (personDAO.checkUsername(person) == true && person.getUsername().length()<3) {
+			modelMap.put("error", "username already exist or invalid username");
+			message.setMessage("username already exist or invalid username");
 			System.out.println("username");
+			return new ResponseEntity<MessageService>(message,HttpStatus.BAD_REQUEST);
 		} else if (personDAO.checkName(person) == false) {
 			modelMap.put("error", "enter a name");
+			message.setMessage("invalid name");
 			System.out.println("name");
-		} else if (personDAO.checkSurname(person) == false) {
-			modelMap.put("error", "enter a surname");
-			System.out.println("surname");
+			return new ResponseEntity<MessageService>(message,HttpStatus.BAD_REQUEST);
 		} else if (personDAO.checkRegisterPasswords(person) == false) {
-			modelMap.put("error", "confirm password and password are not the same");
+			modelMap.put("error", " confirm password and password are not the same");
+			message.setMessage("confirm password and password are not the same");
 			System.out.println("password");
-		} else {
-			personDAO.save(person);
-			return (HttpStatus.CREATED);
+			
+		}else if(personDAO.checkPasswordLength(person.getPassword())==false) {
+			 message.setMessage("length of password must be more than 5 ");
+			 return new ResponseEntity<MessageService>(message,HttpStatus.BAD_REQUEST);
 		}
+		
+			personDAO.save(person);
+			message.setMessage("successful!!!!");
+			return new ResponseEntity<MessageService>(message,HttpStatus.CREATED);
+		
+		
+	
 
-		return HttpStatus.CONFLICT;
 	}
 
 	@RequestMapping(value = "/accessLogin", method = { RequestMethod.POST })
 	@ResponseBody
-	public HttpStatus Login(@RequestBody LoginService login) {
+	public ResponseEntity<Person> Login(@RequestBody LoginService login) {
 
-		boolean isUser = personDAO.findPerson(login.getUsername(), login.getPassword());
+		Person personLogin = personDAO.findPerson(login.getUsername(), login.getPassword());
 		// "memol12","5542157"
 
-		if (isUser == true) {
+		if (personLogin.getId()!=0) {
 
-			return HttpStatus.OK;
-
+			 return new ResponseEntity<Person>(personLogin,HttpStatus.OK);
+			
 		}
 
-		return HttpStatus.BAD_REQUEST;
+		 return new ResponseEntity<Person>(personLogin,HttpStatus.BAD_REQUEST);
 
 	}
 
@@ -108,28 +111,30 @@ public class PersonController {
 	public ResponseEntity<Person> updatePerson(@RequestBody Person person, ModelMap modelMap) {
 		Person currentPerson = new Person();
 		currentPerson = personDAO.findPersonID(person.getId());
-
-		if (personDAO.checkEmail(person) == true && currentPerson.getEmail().equals(person.getEmail()) != false) {
-			modelMap.put("error", "email already exist");
-			System.out.println("email");
-		} else if (personDAO.checkUsername(person) == true
-				&& currentPerson.getUsername().equals(person.getUsername()) != false) {
-			modelMap.put("error", "username already exist");
+		
+		if(personDAO.checkUsername(person)==true&& currentPerson.getUsername().equals(person.getUsername())!=true) {
+			modelMap.put("error", "username already exsist");
 			System.out.println("username");
-		} else if (personDAO.checkName(person) == false) {
-			modelMap.put("error", "enter a name");
-			System.out.println("name");
-		} else if (personDAO.checkSurname(person) == false) {
-			modelMap.put("error", "enter a surname");
-			System.out.println("surname");
-
-		} else {
+			return new ResponseEntity<Person>(person, HttpStatus.BAD_REQUEST);
+		}else
+		if (personDAO.checkEmail(person.getEmail()) == true && currentPerson.getEmail().equals(person.getEmail()) != true) {
+			modelMap.put("error", "email already exist");
+			System.out.println(currentPerson.getEmail());
+			System.out.println(person.getEmail());
+			System.out.println("deneme email");
+			return new ResponseEntity<Person>(person, HttpStatus.BAD_REQUEST);
+		} else if (personDAO.checkRegisterPasswords(person) == false) {
+			modelMap.put("error", " confirm password and password are not the same");
+			System.out.println("password");
+			return new ResponseEntity<Person>(person, HttpStatus.BAD_REQUEST);
+		}
+		else {
 			personDAO.update(person);
 
 			return new ResponseEntity<Person>(person, HttpStatus.OK);
 		}
 
-		return new ResponseEntity<Person>(person, HttpStatus.BAD_REQUEST);
+		
 
 	}
 

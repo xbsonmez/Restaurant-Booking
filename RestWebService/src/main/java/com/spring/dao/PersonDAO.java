@@ -13,17 +13,20 @@ public interface PersonDAO {
 
 	public List<Person>  loadAll();
 
-	public boolean findPerson( String username, String password);
+	public Person findPerson( String username, String password);
 
 	public boolean checkUsername(@RequestBody Person person);
 
-	public boolean checkEmail(@RequestBody Person person);
+	public boolean checkEmail(String email);
 
+	public boolean validEmail(String email);
+	
 	public boolean checkRegisterPasswords(@RequestBody Person person);
+	public boolean checkPasswordLength(String s);
 
 	public boolean checkName(@RequestBody Person person);
 
-	public boolean checkSurname(@RequestBody Person person);
+	
 	
 	public boolean checkEnabled(@RequestBody Person person);
 	

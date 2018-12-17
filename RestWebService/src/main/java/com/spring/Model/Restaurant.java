@@ -12,12 +12,29 @@ public class Restaurant {
 	private String featuresInfo;
 	private String location;
 	private boolean isApproved;
+	private String restaurantName;
+	
 	
 	
 	public Restaurant() {
 		
 	}
 	
+
+	
+
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+
+
+
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
+
+
 
 
 	public boolean isApproved() {
