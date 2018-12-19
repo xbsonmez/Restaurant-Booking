@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/manager_login_menu"
+        >
+        <item
+            android:id="@+id/nav_profile_layout"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_my_restaurants_layout"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="My Restaurants" />
+        <item
+            android:id="@+id/nav_explore_layout"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Explore" />
+
+    </group>
+
+
+
+    <group
+        android:id="@+id/user_login_menu"
+        >
+
+        <item
+            android:id="@+id/nav_user_profile_layout"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_my_reservations_layout"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="My Reservations" />
+        <item
+            android:id="@+id/nav_user_explore_layout"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Explore" />
+
+    </group>
+
+
+
+
+
+    <group
+        android:id="@+id/visitor_menu"
+        >
+
+        <item
+            android:id="@+id/visitor_exp_layout"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Login" />
+
+    </group>
+
+    <group
+
+        android:id="@+id/admin_menu">
+
+        <item
+            android:id="@+id/profile_admin"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Profile">
+
+
+        </item>
+
+        <item
+            android:id="@+id/explore_admin"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Explore">
+
+
+        </item>
+
+
+        <item
+            android:id="@+id/admin_add_inbox"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Add Restaurant Requests">
+
+
+        </item>
+
+        <item
+            android:id="@+id/admin_delete_inbox"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Delete Restaurant Requests">
+
+
+        </item>
+        <item
+            android:id="@+id/admin_update_inbox"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Update Restaurant Requests">
+
+
+        </item>
+
+
+
+
+    </group>
+</menu>

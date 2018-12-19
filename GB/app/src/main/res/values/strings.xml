@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">GB</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_deneme_layout">deneme_layout</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_edit_profile">EditProfile</string>
+    <string name="add_restaurant_button">Add Restaurant</string>
+    <string name="delete_restaurant_button">Delete Restaurant</string>
+    <string name="title_activity_add_restaurant">AddRestaurant</string>
+    <string name="title_activity_delete_restaurant">DeleteRestaurant</string>
+    <string name="add_resturant_string">Add Restaurant Page</string>
+    <string name="restaurant_phone_string">Phone</string>
+    <string name="restaurant_location_string">Location</string>
+    <string name="restaurant_capacityOfPeople_string">People Capacity</string>
+    <string name="restaurant_capacityOfTable_string">Table Capacity</string>
+    <string name="restaurant_features_string">Features</string>
+    <string name="title_activity_restaurant_page">RestaurantPage</string>
+    <string name="title_activity_source_for_profile">SourceForProfile</string>
+    <string name="restaurant_page_edit_profile_butto">Edit Restaurant</string>
+    <string name="title_activity_edit_restaurant_page">EditRestaurantPage</string>
+    <string name="send_approval_page">Send Request</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_update_restaurant_page">UpdateRestaurantPage</string>
+    <string name="title_activity_answer_update_restaurant_request_page">
+        AnswerUpdateRestaurantRequestPage
+    </string>
+    <string name="title_activity_reservation_page">ReservationPage</string>
+</resources>

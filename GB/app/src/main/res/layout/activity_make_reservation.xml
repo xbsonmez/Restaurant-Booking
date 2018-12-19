@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MakeReservationActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+
+    <Button
+        android:id="@+id/show_avaliable_times_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
+        android:text="Show Avaliable Tımes"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/number_picker_make_reservation" />
+
+    <TextView
+        android:id="@+id/osman"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="56dp"
+        android:text="Tap To Select Date"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/choose_number_of_person_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/select_date_tv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <NumberPicker
+
+        android:id="@+id/number_picker_make_reservation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toTopOf="@+id/show_avaliable_times_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/choose_number_of_person_tv"
+        app:layout_constraintTop_toBottomOf="@+id/select_date_tv" />
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_time_layout"
+        android:layout_width="253dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/reserve_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_avaliable_times_button"></include>
+
+    <TextView
+        android:id="@+id/choose_number_of_person_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="51dp"
+        android:text="Choose Number Of People:"
+        app:layout_constraintEnd_toStartOf="@+id/number_picker_make_reservation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_date_tv" />
+
+    <Button
+        android:id="@+id/reserve_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="Reserve"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+    <TextView
+        android:id="@+id/select_date_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+
+        android:layout_marginTop="66dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="19dp"
+        android:text="Select Reservation Date"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/number_picker_make_reservation"
+        app:layout_constraintEnd_toStartOf="@+id/osman"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
